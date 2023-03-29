@@ -1,7 +1,6 @@
 package telegram_server
 
 import (
-	"fmt"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/sashabaranov/go-openai"
 	"go.uber.org/fx"
@@ -15,7 +14,6 @@ func StartTelegram(fxOptions []fx.Option) {
 		fxOptions,
 		fx.Invoke(
 			func(lc fx.Lifecycle, bot *telegramBot.TelegramBotImpl, chatGPT *chatGPT.ChatGptImpl) {
-				fmt.Println("INIT_TELEGRAM", chatGPT)
 				messages := make([]openai.ChatCompletionMessage, 0)
 
 				bot.ListenForMessage(func(update tgbotapi.Update) {
