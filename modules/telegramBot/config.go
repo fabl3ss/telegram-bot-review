@@ -8,12 +8,6 @@ type TelegramBot struct {
 	ApiToken string "env: TELEGRAM_API_TOKEN"
 }
 
-type Commands struct {
-	weather string
-	chatgpt string
-}
-
 type TelegramBotImpl struct {
-	Bot      *tgbotapi.BotAPI
-	commands *Commands
+	Bot *tgbotapi.BotAPI
 }

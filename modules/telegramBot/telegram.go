@@ -5,6 +5,10 @@ import (
 	"log"
 )
 
+const (
+	defaultTimeout = 60
+)
+
 func initTelegram(cfg *TelegramBot) *TelegramBotImpl {
 	bot, err := tgbotapi.NewBotAPI(cfg.ApiToken)
 
@@ -15,11 +19,11 @@ func initTelegram(cfg *TelegramBot) *TelegramBotImpl {
 	return &TelegramBotImpl{Bot: bot}
 }
 
-func (b *TelegramBotImpl) ListenForMessage(fn func(message tgbotapi.Update)) {
+func (t *TelegramBotImpl) ListenForMessage(fn func(message tgbotapi.Update)) {
 	u := tgbotapi.NewUpdate(0)
-	u.Timeout = 60
+	u.Timeout = defaultTimeout
 
-	updates := b.Bot.GetUpdatesChan(u)
+	updates := t.Bot.GetUpdatesChan(u)
 
 	for update := range updates {
 		if update.Message == nil {
